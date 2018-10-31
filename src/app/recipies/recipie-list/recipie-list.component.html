@@ -8,7 +8,8 @@
     <div class="col-xs-12">
         <app-recipie-item
           *ngFor="let recipieEl of recipies"
-          [recipie]="recipieEl"></app-recipie-item>
+          [recipie]="recipieEl"
+          (recipieSelected)="onRecipieSelected(recipieEl)"></app-recipie-item>
     </div>
 </div>
 

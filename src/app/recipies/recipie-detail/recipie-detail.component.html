@@ -1,11 +1,15 @@
 <div class="row">
   <div class="col-xs-12">
-    <img src="" alt="" class="img-responsive">
+    <img 
+    [src]="recipie.imagePath" 
+    alt="{{recipie.name}}" 
+    class="img-responsive"
+    style="max-height: 300px;">
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <h1>Recipie name</h1>
+    <h1>{{ recipie.name }}</h1>
   </div>
 </div>
 <div class="row">
@@ -32,7 +36,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    Description
+    {{recipie.description}}
   </div>
 </div>
 <div class="row">
