@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipie } from '../recipie.model';
+import { RecipieService } from '../recipie.service';
 
 @Component({
   selector: 'app-recipie-list',
@@ -8,18 +9,15 @@ import { Recipie } from '../recipie.model';
 })
 export class RecipieListComponent implements OnInit {
 
-  @Output() recipieWasSelected = new EventEmitter<Recipie>();
+  
+  recipies: Recipie[];
 
-  recipies: Recipie[] = [
-    new Recipie("A test recipie","This is simply a test","https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Fimg1.southernliving.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2Fimage%2F2018%2F02%2Fmain%2F2548601_qfsba_rice_with_scallops_152.jpg%3Fitok%3Dqvkz_lUq&w=700&q=85"),
-    new Recipie("Another test recipie","This is simply a test","https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Fimg1.southernliving.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2Fimage%2F2018%2F02%2Fmain%2F2548601_qfsba_rice_with_scallops_152.jpg%3Fitok%3Dqvkz_lUq&w=700&q=85")
-  ];
-  constructor() { }
+
+  constructor(private recipieService: RecipieService) { }
 
   ngOnInit() {
+    this.recipies = this.recipieService.getRecipies();
   }
 
-  onRecipieSelected(recipie: Recipie) {
-    this.recipieWasSelected.emit(recipie);
-  }
+
 }
