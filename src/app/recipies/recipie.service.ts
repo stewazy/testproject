@@ -1,12 +1,23 @@
 import { Recipie } from "./recipie.model";
 import { EventEmitter } from "@angular/core";
+import { Ingredient } from "../shared/ingredient.model";
 
 export class RecipieService {
     recipieSelected = new EventEmitter<Recipie>();
 
     private recipies: Recipie[] = [
-        new Recipie("A test recipie","This is simply a test","https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Fimg1.southernliving.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2Fimage%2F2018%2F02%2Fmain%2F2548601_qfsba_rice_with_scallops_152.jpg%3Fitok%3Dqvkz_lUq&w=700&q=85"),
-        new Recipie("Another test recipie","This is simply a test","https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Fimg1.southernliving.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2Fimage%2F2018%2F02%2Fmain%2F2548601_qfsba_rice_with_scallops_152.jpg%3Fitok%3Dqvkz_lUq&w=700&q=85")
+        new Recipie("Tasty Schnitzel",
+        "A super tasty Schnitzel - just awesome","https://www.daringgourmet.com/wp-content/uploads/2014/03/Schnitzel-7_edited.jpg",
+        [
+          new Ingredient('Meat', 1),
+          new Ingredient('French Fries', 20)
+        ]),
+        new Recipie("Big Fat Burger",
+        "What else do you need to say?","https://7gigzxopz0uiqxo1-zippykid.netdna-ssl.com/wp-content/uploads/2017/05/mcdonalds.jpg",
+        [
+          new Ingredient('Buns', 2),
+          new Ingredient('Meat', 1)
+        ])
     ];
 
     getRecipies() {
