@@ -30,6 +30,10 @@ export class RecipieService {
         return this.recipies.slice();
     }
 
+    getRecipie(index: number) {
+        return this.recipies[index];
+    }
+
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
         this.slService.addIngridients(ingredients);
     }
