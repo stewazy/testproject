@@ -28,11 +28,15 @@ export class RecipieEditComponent implements OnInit {
     );
   }
 
+  onSubmit() {
+    console.log(this.recipieForm);
+  }
+
   private initForm() {
 
     let recipieName = '';
     let recipieImagePath = '';
-    let recipieDescription = ''l
+    let recipieDescription = '';
 
     if(this.editMode) {
       const recipie = this.recipieService.getRecipie(this.id);
