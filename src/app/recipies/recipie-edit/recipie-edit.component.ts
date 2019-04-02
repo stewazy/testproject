@@ -1,7 +1,7 @@
 import { RecipieService } from './../recipie.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-recipie-edit',
@@ -37,18 +37,30 @@ export class RecipieEditComponent implements OnInit {
     let recipieName = '';
     let recipieImagePath = '';
     let recipieDescription = '';
+    let recipieIngredients = new FormArray([]);
 
     if(this.editMode) {
       const recipie = this.recipieService.getRecipie(this.id);
       recipieName = recipie.name;
       recipieImagePath = recipie.imagePath;
       recipieDescription = recipie.description;
+      if (recipie['ingredients']) {
+        for (let ingredient of recipie.ingredients) {
+          recipieIngredients.push(
+            new FormGroup({
+              'name' : new FormControl(ingredient.name),
+              'amount' : new FormControl(ingredient.amount)
+            })  
+          );
+        }
+      }
     }
     this.recipieForm = new FormGroup(
       {
         'name': new FormControl(recipieName),
         'imagePath': new FormControl(recipieImagePath),
-        'description': new FormControl(recipieDescription)
+        'description': new FormControl(recipieDescription),
+        'ingredients' : recipieIngredients
       }
     );
   }
