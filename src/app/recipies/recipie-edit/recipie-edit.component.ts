@@ -1,7 +1,8 @@
 import { RecipieService } from './../recipie.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { Ingredient } from 'src/app/shared/ingredient.model';
 
 @Component({
   selector: 'app-recipie-edit',
@@ -36,8 +37,11 @@ export class RecipieEditComponent implements OnInit {
     (<FormArray>this.recipieForm.get('ingredients')).push(
       new FormGroup(
         {
-          'name' : new FormControl(),
-          'amount' : new FormControl()
+          'name' : new FormControl(Validators.required),
+          'amount' : new FormControl(null, [
+            Validators.required,
+            Validators.pattern(/^[1-9]+[0-9]*$/)
+          ])
         }
       )
     );
@@ -59,8 +63,11 @@ export class RecipieEditComponent implements OnInit {
         for (let ingredient of recipie.ingredients) {
           recipieIngredients.push(
             new FormGroup({
-              'name' : new FormControl(ingredient.name),
-              'amount' : new FormControl(ingredient.amount)
+              'name' : new FormControl(ingredient.name, Validators.required),
+              'amount' : new FormControl(ingredient.amount, [
+                Validators.required,
+                Validators.pattern(/^[1-9]+[0-9]*$/)
+              ])
             })  
           );
         }
@@ -68,9 +75,9 @@ export class RecipieEditComponent implements OnInit {
     }
     this.recipieForm = new FormGroup(
       {
-        'name': new FormControl(recipieName),
-        'imagePath': new FormControl(recipieImagePath),
-        'description': new FormControl(recipieDescription),
+        'name': new FormControl(recipieName, Validators.required),
+        'imagePath': new FormControl(recipieImagePath, Validators.required),
+        'description': new FormControl(recipieDescription, Validators.required),
         'ingredients' : recipieIngredients
       }
     );

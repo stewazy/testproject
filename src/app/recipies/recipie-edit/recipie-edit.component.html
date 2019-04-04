@@ -3,7 +3,8 @@
     <form [formGroup]="recipieForm" (ngSubmit)="onSubmit()" >
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success">Save</button>
+          <button class="btn btn-success"
+          [disabled]="!recipieForm.valid">Save</button>
           <button class="btn btn-danger">Cancel</button>
         </div>
       </div>
